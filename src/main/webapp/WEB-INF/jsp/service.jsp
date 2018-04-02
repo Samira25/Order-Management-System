@@ -50,6 +50,7 @@
         <a href="<c:url value="/viewallproduct"/>">View all Product</a><br><br><br>
         <a href="<c:url value="/viewallorder"/>">View all Order</a><br><br><br>
         <a href="<c:url value="/viewallrole"/>">View all Role</a><br><br><br>
+        <a href="<c:url value="/viewalluser_role"/>">View all User Role</a><br><br><br>
     </div>
 
 </div>

@@ -1,13 +1,14 @@
 package co.innoweb.implement;
 
 import co.innoweb.Service.OrderService;
+import co.innoweb.model.Customer;
 import co.innoweb.model.Order;
+import co.innoweb.model.Product;
 import co.innoweb.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -62,6 +63,8 @@ public class OrderImplement implements OrderService {
                 Order order = new Order();
                 order.setId(resultSet.getLong("id"));
                 order.setQuantity(resultSet.getInt("quantity"));
+                order.setCustomer_id((Customer) resultSet.getArray("id"));
+                order.setProduct_id((Product) resultSet.getArray("id"));
                 order.setTotal_price(resultSet.getDouble("total_price"));
                 order.setDelivery_date(resultSet.getDate("delivery_date"));
                 return order;

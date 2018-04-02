@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -27,8 +26,8 @@ public class ProductImplement implements ProductService {
     }
 
     @Override
-    public void save(Product product) {
-        productRepository.save(product);
+    public Product save(Product product) {
+        return productRepository.save(product);
     }
 
     @Override

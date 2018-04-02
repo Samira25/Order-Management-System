@@ -5,30 +5,22 @@ import co.innoweb.model.Order;
 import co.innoweb.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.jws.WebParam;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.Map;
 
 @Controller
 public class OrderController {
     @Autowired private OrderRepository orderRepository;
     @Autowired private OrderService orderService;
-
-    //add new order via service page
-    @RequestMapping(value = "/addorder", method = RequestMethod.GET)
-    public String add(Map<String, Object> map, @ModelAttribute("addorder")Order addorder) {
-        return "addorder";
-    }
-
-    @RequestMapping(value = "/addorder", method = RequestMethod.POST)
-    public String addnew(@ModelAttribute("addorder")Order addorder) {
-        orderService.save(addorder);
-        return "service";
-    }
 
     //see all order via service page
     @RequestMapping(value = "/viewallorder", method = RequestMethod.GET)
@@ -66,6 +58,18 @@ public class OrderController {
         Order ord = orderService.getById(id);
         map.put("detailorder", ord);
         return "detailorder";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/saveOrders", method = RequestMethod.GET)
+    public String saveOrders(@Valid @RequestBody HttpServletRequest request, HttpServletResponse response, BindingResult result, Model model,
+                             @RequestParam(value = "items")String []items, @RequestParam(value = "price")String []price) throws ServletException {
+        System.out.println("------------------");
+        System.out.println(result);
+        System.out.println(Arrays.toString(items));
+        System.out.println(Arrays.toString(price));
+        System.out.println("------------------");
+        return "saveOrders";
     }
 
 }

@@ -48,8 +48,6 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Salary</th>
-                    <th>Designation</th>
                 </tr>
                 <c:forEach items="${rolelist}" var="role">
                     <tr>

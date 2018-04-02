@@ -6,15 +6,16 @@ import co.innoweb.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Service("CustomerService")
+@Service("customerService")
 public class CustomerImplement implements CustomerService {
 
     @Autowired private CustomerService userService;
@@ -27,8 +28,8 @@ public class CustomerImplement implements CustomerService {
     }
 
     @Override
-    public void save(Customer customer) {
-        userRepository.save(customer);
+    public Customer save(Customer customer) {
+      return  userRepository.save(customer);
     }
 
     @Override
@@ -73,9 +74,10 @@ public class CustomerImplement implements CustomerService {
     }
 
     @Override
-    public Customer login(String username, String password) {
+    public Customer login(String username, String password, HttpServletRequest request) {
         Customer customer = userRepository.login(username, password);
         if (customer != null) {
+            request.getSession().setAttribute("user",customer);
             return customer;
         }
         return null;

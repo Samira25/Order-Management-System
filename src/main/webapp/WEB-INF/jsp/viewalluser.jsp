@@ -14,6 +14,13 @@
     <c:url value="/css/main.css" var="jstlCss" />
     <link href="${jstlCss}" rel="stylesheet" />
 
+    <style>
+        table, th, td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -43,7 +50,7 @@
 
         <spring:url value="/register" var="register" />
         <c:if test="${!empty userlist}">
-            <table class="table-bordered">
+            <div class="well"><table class="table-bordered" width="100%">
 
                 <tr>
                     <th>Id</th>
@@ -70,7 +77,7 @@
                     </tr>
                 </c:forEach>
 
-            </table>
+            </table></div>
         </c:if>
 
     </div>
